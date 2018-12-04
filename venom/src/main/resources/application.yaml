@@ -1,7 +1,20 @@
+#app
 server:
-  port: 8080
+  port: 80
+  tomcat:
+    uri-encoding: utf-8
+    max-threads: 1000
+    max-connections: 1000
+  servlet:
+    session:
+      timeout: 10ms
+#spring
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+    encoding: utf-8
+    suffix: .html
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
