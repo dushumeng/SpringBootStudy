@@ -1,4 +1,0 @@
-package com.starcor.stb.venom;
-
-public class UploadController {
-}
