@@ -1,8 +1,11 @@
 package com.starcor.stb.venom.api;
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 
-public class ApiHeader {
+import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
+
+public class ApiHeader implements Serializable{
 
     public String clientOS;
     public String clientOSVersion;
@@ -41,5 +44,24 @@ public class ApiHeader {
 
     public boolean isValid() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ApiHeader{" +
+                "clientOS='" + clientOS + '\'' +
+                ", clientOSVersion='" + clientOSVersion + '\'' +
+                ", clientVersion='" + clientVersion + '\'' +
+                ", clientVersionName='" + clientVersionName + '\'' +
+                ", clientVersionCode='" + clientVersionCode + '\'' +
+                ", deviceUUID='" + deviceUUID + '\'' +
+                ", deviceModel='" + deviceModel + '\'' +
+                ", deviceBrand='" + deviceBrand + '\'' +
+                ", clientMarket='" + clientMarket + '\'' +
+                ", deviceMac='" + deviceMac + '\'' +
+                ", userId='" + userId + '\'' +
+                ", timestamp=" + timestamp +
+                ", sign='" + sign + '\'' +
+                '}';
     }
 }
