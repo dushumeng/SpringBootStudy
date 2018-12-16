@@ -37,9 +37,111 @@ public class ApiHeader implements Serializable{
         apiHeader.clientVersion = request.getHeader("client_version");
         apiHeader.clientOSVersion = request.getHeader("client_os_version");
         apiHeader.clientOS = request.getHeader("client_os");
-
-
         return apiHeader;
+    }
+
+    public String getClientOS() {
+        return clientOS;
+    }
+
+    public void setClientOS(String clientOS) {
+        this.clientOS = clientOS;
+    }
+
+    public String getClientOSVersion() {
+        return clientOSVersion;
+    }
+
+    public void setClientOSVersion(String clientOSVersion) {
+        this.clientOSVersion = clientOSVersion;
+    }
+
+    public String getClientVersion() {
+        return clientVersion;
+    }
+
+    public void setClientVersion(String clientVersion) {
+        this.clientVersion = clientVersion;
+    }
+
+    public String getClientVersionName() {
+        return clientVersionName;
+    }
+
+    public void setClientVersionName(String clientVersionName) {
+        this.clientVersionName = clientVersionName;
+    }
+
+    public String getClientVersionCode() {
+        return clientVersionCode;
+    }
+
+    public void setClientVersionCode(String clientVersionCode) {
+        this.clientVersionCode = clientVersionCode;
+    }
+
+    public String getDeviceUUID() {
+        return deviceUUID;
+    }
+
+    public void setDeviceUUID(String deviceUUID) {
+        this.deviceUUID = deviceUUID;
+    }
+
+    public String getDeviceModel() {
+        return deviceModel;
+    }
+
+    public void setDeviceModel(String deviceModel) {
+        this.deviceModel = deviceModel;
+    }
+
+    public String getDeviceBrand() {
+        return deviceBrand;
+    }
+
+    public void setDeviceBrand(String deviceBrand) {
+        this.deviceBrand = deviceBrand;
+    }
+
+    public String getClientMarket() {
+        return clientMarket;
+    }
+
+    public void setClientMarket(String clientMarket) {
+        this.clientMarket = clientMarket;
+    }
+
+    public String getDeviceMac() {
+        return deviceMac;
+    }
+
+    public void setDeviceMac(String deviceMac) {
+        this.deviceMac = deviceMac;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 
     public boolean isValid() {

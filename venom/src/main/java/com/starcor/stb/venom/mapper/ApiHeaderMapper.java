@@ -15,7 +15,7 @@ public interface ApiHeaderMapper {
     //插入数据
     @Insert("INSERT INTO journal_tb(" +
             "client_os,client_os_version,client_version,client_versionname,device_uuid,device_model,device_brand,client_market,device_mac,user_id,timestamp,journal_path) " +
-            "VALUES(#{client_os},#{client_os_version}),#{client_version}, #{client_versionname}, #{device_uuid}, #{device_model}, #{device_brand}, #{client_market}, #{device_mac}, #{user_id}, #{timestamp}, #{journal_path}")
+            "VALUES(#{client_os},#{client_os_version},#{client_version}, #{client_versionname}, #{device_uuid}, #{device_model}, #{device_brand}, #{client_market}, #{device_mac}, #{user_id}, #{timestamp}, #{journal_path})")
     @SelectKey(statement = "SELECT seq id FROM sqlite_sequence WHERE (name = 'journal_tb')", before = false, keyProperty = "journal_id", resultType = int.class)
     int insert(ApiHeaderVo apiHeaderVo);
 
