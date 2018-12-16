@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+    <!-- 数据库驱动包位置 -->
+    <!--<classPathEntry location="C:\Users\shmdu\.m2\repository\org\xerial\sqlite-jdbc\3.21.0.1\sqlite-jdbc-3.21.0.1.jar"/>-->
+
+    <classPathEntry location="C:\Users\shmdu\.m2\repository\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <property name="jdbcType" value="false"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- mapper插件 -->
+        <!--<plugin type="com.github.abel533.generator.MapperPlugin">-->
+            <!--<property name="mappers" value="com.github.abel533.mapper.Mapper"/>-->
+        <!--</plugin>-->
+
+        <!-- 生成的pojo，将implements Serializable-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!-- 去掉example -->
+        <!--    <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+                <property name="searchString" value="Example$" />
+                <property name="replaceString" value="Criteria" />
+            </plugin>-->
+        <!-- 去掉生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库链接URL、用户名、密码 -->
+        <!--<jdbcConnection driverClass="org.sqlite.JDBC"-->
+                        <!--connectionURL="jdbc:sqlite:resources:venom.db"-->
+                        <!--userId=""-->
+                        <!--password="" />-->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/venom"
+                        userId="root"
+                        password="root"/>
+
+        <!-- 模型文件 -->
+        <javaModelGenerator targetPackage="com.starcor.stb.venom.model" targetProject="${targetJavaProject}" />
+        <!-- XML映射文件 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="${targetJavaProject}" />
+        <!-- Mapper文件 -->
+        <javaClientGenerator targetPackage="com.starcor.stb.venom.mapper" targetProject="${targetJavaProject}" type="XMLMAPPER" />
+
+        <!-- 要生成哪些表(更改tableName和domainObjectName就可以) -->
+        <table tableName="t_client_log" domainObjectName="ClientLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" enableDeleteByPrimaryKey="false" ></table>
+
+    </context>
+</generatorConfiguration>

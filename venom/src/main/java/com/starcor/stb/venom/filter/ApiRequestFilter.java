@@ -11,12 +11,8 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle");
-//        ApiHeader apiHeader = ApiHeader.parse(request);
-//        if (apiHeader.isValid()) {
-//            return true;
-//        } else {
-//            return false;
-//        }
+        ApiHeader apiHeader = ApiHeader.parse(request);
+        request.setAttribute("api_header", apiHeader);
         return true;
     }
 

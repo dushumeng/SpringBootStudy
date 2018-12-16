@@ -23,6 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <jackson-module-jaxb-annotations.version>2.8.7</jackson-module-jaxb-annotations.version>
+        <targetJavaProject>${basedir}\src\test\java</targetJavaProject>
     </properties>
 
     <dependencies>
@@ -108,6 +109,18 @@
             <version>1.9.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.32</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -116,6 +129,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.7</version>
+            </plugin>
+
         </plugins>
     </build>
 

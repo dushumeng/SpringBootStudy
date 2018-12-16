@@ -1,4 +1,4 @@
-package com.starcor.stb.venom.util;
+package com.starcor.stb.core.util;
 
 import org.apache.commons.lang3.StringUtils;
 

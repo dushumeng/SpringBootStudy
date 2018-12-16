@@ -1,12 +1,12 @@
 package com.starcor.stb.venom.api;
 
-import com.starcor.stb.venom.util.NumberUtils;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.starcor.stb.core.util.NumberUtils;
+import com.starcor.stb.core.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
-public class ApiHeader implements Serializable{
+public class ApiHeader implements Serializable {
 
     public String clientOS;
     public String clientOSVersion;
@@ -21,6 +21,7 @@ public class ApiHeader implements Serializable{
     public String userId;
     public long timestamp;
     public String sign;
+    public String ip;
 
     public static ApiHeader parse(HttpServletRequest request) {
 
@@ -38,7 +39,7 @@ public class ApiHeader implements Serializable{
         apiHeader.clientVersion = request.getHeader("client_version");
         apiHeader.clientOSVersion = request.getHeader("client_os_version");
         apiHeader.clientOS = request.getHeader("client_os");
-
+        apiHeader.ip = WebUtils.getIpAddress(request);
 
         return apiHeader;
     }

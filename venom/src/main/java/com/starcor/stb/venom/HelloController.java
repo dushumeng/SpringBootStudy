@@ -1,4 +1,4 @@
-package com.starcor.stb.venom.controller;
+package com.starcor.stb.venom;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
