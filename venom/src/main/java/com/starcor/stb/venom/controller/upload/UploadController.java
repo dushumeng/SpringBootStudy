@@ -6,6 +6,7 @@ import com.starcor.stb.venom.service.JournalService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class UploadController {
@@ -22,9 +23,9 @@ public class UploadController {
     }
 
 
-    @RequestMapping(value = "/function")//,method = RequestMethod.POST
     @ResponseBody
-    public ResponseData function(@RequestParam("clientOS") String os){//@RequestParam() ApiHeader apiHeader
+    @RequestMapping(value = "/function")//,method = RequestMethod.POST
+    public ResponseData function(@RequestParam("clientOS") String os, HttpServletRequest request){//@RequestParam() ApiHeader apiHeader
         ResponseData resultData = new ResponseData();
 
         String name = "fileName.zip";// TODO: 2018/12/15 这里是上传文件的名称

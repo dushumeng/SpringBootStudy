@@ -1,5 +1,6 @@
 package com.starcor.stb.venom.api;
 
+import com.starcor.stb.venom.util.NumberUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class ApiHeader implements Serializable{
 
         ApiHeader apiHeader = new ApiHeader();
         apiHeader.sign = request.getHeader("sign");
-        apiHeader.timestamp = Long.valueOf(request.getHeader("timestamp"));
+        apiHeader.timestamp = NumberUtils.parseLong(request.getHeader("timestamp"));
         apiHeader.deviceMac = request.getHeader("device_mac");
         apiHeader.userId = request.getHeader("user_id");
         apiHeader.clientMarket = request.getHeader("client_market");
