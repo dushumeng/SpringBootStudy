@@ -17,15 +17,21 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle");
         String servletPath = request.getServletPath();
-        if (StringUtils.isNotEmpty(servletPath) && servletPath.startsWith("/api")) {
+        // TODO: 2018/12/17 检查输入参数 
+        if (StringUtils.isNotEmpty(servletPath) && servletPath.startsWith("/api") && 1 < 0) {
             ApiHeader apiHeader = ApiHeader.parse(request);
+            if (!apiHeader.isValid()){
+                response.setContentType("application/json");
+                response.getOutputStream().write("{\"code\":-3,\"msg\":\"request is not valid\"}".getBytes());
+                return false;
+            }
             String midSign = DigestUtils.md5Hex(apiHeader.timestamp + MD5_KEY);
             request.setAttribute("api_header", apiHeader);
-//            if (!StringUtils.equals(midSign, apiHeader.sign)) {
-//                response.setContentType("application/json");
-//                response.getOutputStream().write("{\"code\":-1}".getBytes());
-//                return false;
-//            }
+            if (!StringUtils.equals(midSign, apiHeader.sign)) {
+                response.setContentType("application/json");
+                response.getOutputStream().write("{\"code\":-1}".getBytes());
+                return false;
+            }
         }
         return true;
     }
