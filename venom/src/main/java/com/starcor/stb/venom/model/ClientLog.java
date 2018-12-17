@@ -1,6 +1,8 @@
 package com.starcor.stb.venom.model;
 
-public class ClientLog {
+import java.io.Serializable;
+
+public class ClientLog implements Serializable {
     private Integer id;
 
     private String clientOs;
@@ -28,6 +30,10 @@ public class ClientLog {
     private String ip;
 
     private Integer createTime;
+
+    private String type;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -139,5 +145,13 @@ public class ClientLog {
 
     public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
