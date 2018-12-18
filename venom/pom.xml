@@ -91,6 +91,11 @@
             <artifactId>jackson-module-jaxb-annotations</artifactId>
             <version>${jackson-module-jaxb-annotations.version}</version>
         </dependency>
+        <!--gson-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
 
         <!--apache commons-->
         <dependency>

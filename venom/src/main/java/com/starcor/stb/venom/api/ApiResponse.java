@@ -26,5 +26,4 @@ public class ApiResponse {
         this.code = code;
         this.msg = msg;
     }
-
 }
