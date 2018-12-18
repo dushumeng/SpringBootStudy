@@ -2,44 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Clients</title>
+    <title>异常分析</title>
 </head>
 <body>
 <section layout:fragment="header">
-    <h1>Clients</h1>
+    <h1>异常分析</h1>
     <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Clients</li>
+        <li class="active">异常分析</li>
     </ol>
 </section>
 <div layout:fragment="content">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Lists</h3>
+            <h3 class="box-title">列表</h3>
             <div class="box-tools pull-right">
-                <a href="/customers/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                <!--<a href="/customers/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>-->
                 <br clear="all"/>
             </div>
         </div>
         <div class="box-body no-padding">
             <table class="table table-striped">
                 <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Registration Date</th>
-                    <th>Action</th>
+                    <th>用户</th>
+                    <th>类型</th>
+                    <th>MAC</th>
+                    <th>IP</th>
+                    <th>时间</th>
+                    <th>操作</th>
                 </tr>
-                <!--<tr th:each="row : ${list}">-->
-                <!--<td th:text="${row.id}"></td>-->
-                <!--<td th:text="${row.firstname + ' ' + row.lastname}"></td>-->
-                <!--<td th:text="${row.email}"></td>-->
-                <!--<td th:text="${#dates.format(row.addedDate, 'dd/MM/yyyy')}"></td>-->
-                <!--<td>-->
-                <!--<a th:href="${'/customers/edit/' + row.id}">edit</a> - -->
-                <!--<a th:href="${'/customers/delete/' + row.id}">delete</a>-->
-                <!--</td>-->
-                <!--</tr>-->
+                <tr th:each="row:${list}">
+                    <td th:text="${row.userId}"></td>
+                    <td th:text="${row.type}"></td>
+                    <td th:text="${row.deviceMac}"></td>
+                    <td th:text="${row.ip}"></td>
+                    <td th:text="${row.createTimeStr}"></td>
+                    <td>
+                        <a th:href="${'/clientlog/show/' + row.id}">详情</a>
+                        <a th:href="${'/clientlog/delete/' + row.id}">删除</a>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="box-footer clearfix">

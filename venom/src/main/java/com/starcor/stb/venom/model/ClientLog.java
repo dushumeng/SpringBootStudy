@@ -1,9 +1,11 @@
 package com.starcor.stb.venom.model;
 
+import com.starcor.stb.core.util.DateUtils;
+
 import java.io.Serializable;
 
 public class ClientLog implements Serializable {
-    private Integer id;
+    private Long id;
 
     private String clientOs;
 
@@ -29,17 +31,23 @@ public class ClientLog implements Serializable {
 
     private String ip;
 
-    private Integer createTime;
+    private Long createTime;
+
+    private String createTimeStr;
 
     private String type;
 
+    private String psd;
+
+    private String filePath;
+
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -139,11 +147,11 @@ public class ClientLog implements Serializable {
         this.ip = ip;
     }
 
-    public Integer getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Integer createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
@@ -153,5 +161,29 @@ public class ClientLog implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPsd() {
+        return psd;
+    }
+
+    public void setPsd(String psd) {
+        this.psd = psd;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getCreateTimeStr() {
+        return DateUtils.parse(createTime);
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
     }
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>异常分析</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>异常分析</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">异常分析</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-body no-padding">
+            <table class="table">
+                <tr>
+                    <td><b><h4>用户信息</h4></b></td>
+                </tr>
+                <tr>
+                    <td>用户ID</td>
+                    <td th:text="${info.userId}"></td>
+                    <td>用户IP</td>
+                    <td th:text="${info.ip}"></td>
+                </tr>
+                <tr>
+                    <td>上报时间</td>
+                    <td th:text="${info.createTimeStr}"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><b><h4>设备信息</h4></b></td>
+                </tr>
+                <tr>
+                    <td>客户端</td>
+                    <td th:text="${info.clientOs}"></td>
+                    <td>客户端版本</td>
+                    <td th:text="${info.clientOsVersion}"></td>
+                    <td>固件版本</td>
+                    <td th:text="${info.clientOs}"></td>
+                </tr>
+                <tr>
+                    <td>APP版本名</td>
+                    <td th:text="${info.clientVersionName}"></td>
+                    <td>APP版本号</td>
+                    <td th:text="${info.clientVersionCode}"></td>
+                    <td>版本渠道</td>
+                    <td th:text="${info.clientMarket}"></td>
+                </tr>
+                <tr>
+                    <td>设备ID</td>
+                    <td th:text="${info.deviceUuid}"></td>
+                    <td>设备mac</td>
+                    <td th:text="${info.deviceMac}"></td>
+                </tr>
+                <tr>
+                    <td>品牌</td>
+                    <td th:text="${info.deviceBrand}"></td>
+                    <td>机型</td>
+                    <td th:text="${info.deviceModel}"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><b><h4>日志信息</h4></b></td>
+                </tr>
+                <tr>
+                    <td>日志类型</td>
+                    <td th:text="${info.type}"></td>
+                </tr>
+                <tr>
+                    <td>日志文件</td>
+                    <td th:text="${info.filePath}"></td>
+                    <td>解压密码</td>
+                    <td th:text="${info.psd}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

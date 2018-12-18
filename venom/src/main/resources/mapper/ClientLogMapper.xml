@@ -17,13 +17,15 @@
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="create_time" jdbcType="INTEGER" property="createTime" />
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="psd" jdbcType="VARCHAR" property="psd" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
   </resultMap>
   <sql id="Base_Column_List">
     id, client_os, client_os_version, client_version, client_version_name, client_version_code, 
     device_uuid, device_model, device_brand, client_market, device_mac, user_id, ip, 
-    create_time, type
+    create_time, type, psd, file_path
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_client_log
@@ -34,14 +36,14 @@
       client_version, client_version_name, client_version_code, 
       device_uuid, device_model, device_brand, 
       client_market, device_mac, user_id, 
-      ip, create_time, type
-      )
+      ip, create_time, type, 
+      psd, file_path)
     values (#{id,jdbcType=INTEGER}, #{clientOs,jdbcType=VARCHAR}, #{clientOsVersion,jdbcType=VARCHAR}, 
       #{clientVersion,jdbcType=VARCHAR}, #{clientVersionName,jdbcType=VARCHAR}, #{clientVersionCode,jdbcType=VARCHAR}, 
       #{deviceUuid,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, #{deviceBrand,jdbcType=VARCHAR}, 
       #{clientMarket,jdbcType=VARCHAR}, #{deviceMac,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{ip,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}
-      )
+      #{ip,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{psd,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.starcor.stb.venom.model.ClientLog">
     insert into t_client_log
@@ -91,6 +93,12 @@
       <if test="type != null">
         type,
       </if>
+      <if test="psd != null">
+        psd,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -137,6 +145,12 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="psd != null">
+        #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -185,6 +199,12 @@
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="psd != null">
+        psd = #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -203,7 +223,9 @@
       user_id = #{userId,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=INTEGER},
-      type = #{type,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR},
+      psd = #{psd,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -212,5 +234,4 @@
     <include refid="Base_Column_List"/>
     from t_client_log
   </select>
-
 </mapper>
