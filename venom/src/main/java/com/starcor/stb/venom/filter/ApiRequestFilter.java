@@ -17,7 +17,7 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle");
         String servletPath = request.getServletPath();
-        // TODO: 2018/12/17 检查输入参数 
+        // TODO: 2018/12/17 检查输入参数
         if (StringUtils.isNotEmpty(servletPath) && servletPath.startsWith("/api") && 1 < 0) {
             ApiHeader apiHeader = ApiHeader.parse(request);
             if (!apiHeader.isValid()){
