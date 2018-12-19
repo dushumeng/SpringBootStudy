@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.starcor.stb.venom.mapper.ClientLogMapper">
   <resultMap id="BaseResultMap" type="com.starcor.stb.venom.model.ClientLog">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" javaType="java.lang.Long" />
     <result column="client_os" jdbcType="VARCHAR" property="clientOs" />
     <result column="client_os_version" jdbcType="VARCHAR" property="clientOsVersion" />
-    <result column="client_version" jdbcType="VARCHAR" property="clientVersion" />
-    <result column="client_version_name" jdbcType="VARCHAR" property="clientVersionName" />
-    <result column="client_version_code" jdbcType="VARCHAR" property="clientVersionCode" />
+    <result column="client_os_firmware" jdbcType="VARCHAR" property="clientOsFirmware" />
+    <result column="app_version_name" jdbcType="VARCHAR" property="appVersionName" />
+    <result column="app_version_code" jdbcType="VARCHAR" property="appVersionCode" />
     <result column="device_uuid" jdbcType="VARCHAR" property="deviceUuid" />
     <result column="device_model" jdbcType="VARCHAR" property="deviceModel" />
     <result column="device_brand" jdbcType="VARCHAR" property="deviceBrand" />
@@ -21,7 +21,7 @@
     <result column="file_path" jdbcType="VARCHAR" property="filePath" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, client_os, client_os_version, client_version, client_version_name, client_version_code, 
+    id, client_os, client_os_version, client_os_firmware, app_version_name, app_version_code,
     device_uuid, device_model, device_brand, client_market, device_mac, user_id, ip, 
     create_time, type, psd, file_path
   </sql>
@@ -33,13 +33,13 @@
   </select>
   <insert id="insert" parameterType="com.starcor.stb.venom.model.ClientLog">
     insert into t_client_log (id, client_os, client_os_version, 
-      client_version, client_version_name, client_version_code, 
+      client_os_firmware, app_version_name, app_version_code,
       device_uuid, device_model, device_brand, 
       client_market, device_mac, user_id, 
       ip, create_time, type, 
       psd, file_path)
     values (#{id,jdbcType=INTEGER}, #{clientOs,jdbcType=VARCHAR}, #{clientOsVersion,jdbcType=VARCHAR}, 
-      #{clientVersion,jdbcType=VARCHAR}, #{clientVersionName,jdbcType=VARCHAR}, #{clientVersionCode,jdbcType=VARCHAR}, 
+      #{clientOsFirmware,jdbcType=VARCHAR}, #{appVersionName,jdbcType=VARCHAR}, #{appVersionCode,jdbcType=VARCHAR},
       #{deviceUuid,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, #{deviceBrand,jdbcType=VARCHAR}, 
       #{clientMarket,jdbcType=VARCHAR}, #{deviceMac,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{ip,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
@@ -57,14 +57,14 @@
       <if test="clientOsVersion != null">
         client_os_version,
       </if>
-      <if test="clientVersion != null">
-        client_version,
+      <if test="clientOsFirmware != null">
+          client_os_firmware,
       </if>
-      <if test="clientVersionName != null">
-        client_version_name,
+      <if test="appVersionName != null">
+        app_version_name,
       </if>
-      <if test="clientVersionCode != null">
-        client_version_code,
+      <if test="appVersionCode != null">
+        app_version_code,
       </if>
       <if test="deviceUuid != null">
         device_uuid,
@@ -110,14 +110,14 @@
       <if test="clientOsVersion != null">
         #{clientOsVersion,jdbcType=VARCHAR},
       </if>
-      <if test="clientVersion != null">
-        #{clientVersion,jdbcType=VARCHAR},
+      <if test="clientOsFirmware != null">
+        #{clientOsFirmware,jdbcType=VARCHAR},
       </if>
-      <if test="clientVersionName != null">
-        #{clientVersionName,jdbcType=VARCHAR},
+      <if test="appVersionName != null">
+        #{appVersionName,jdbcType=VARCHAR},
       </if>
-      <if test="clientVersionCode != null">
-        #{clientVersionCode,jdbcType=VARCHAR},
+      <if test="appVersionCode != null">
+        #{appVersionCode,jdbcType=VARCHAR},
       </if>
       <if test="deviceUuid != null">
         #{deviceUuid,jdbcType=VARCHAR},
@@ -163,14 +163,14 @@
       <if test="clientOsVersion != null">
         client_os_version = #{clientOsVersion,jdbcType=VARCHAR},
       </if>
-      <if test="clientVersion != null">
-        client_version = #{clientVersion,jdbcType=VARCHAR},
+      <if test="clientOsFirmware != null">
+          client_os_firmware = #{clientOsFirmware,jdbcType=VARCHAR},
       </if>
-      <if test="clientVersionName != null">
-        client_version_name = #{clientVersionName,jdbcType=VARCHAR},
+      <if test="appVersionName != null">
+        app_version_name = #{appVersionName,jdbcType=VARCHAR},
       </if>
-      <if test="clientVersionCode != null">
-        client_version_code = #{clientVersionCode,jdbcType=VARCHAR},
+      <if test="appVersionCode != null">
+        app_version_code = #{appVersionCode,jdbcType=VARCHAR},
       </if>
       <if test="deviceUuid != null">
         device_uuid = #{deviceUuid,jdbcType=VARCHAR},
@@ -212,9 +212,9 @@
     update t_client_log
     set client_os = #{clientOs,jdbcType=VARCHAR},
       client_os_version = #{clientOsVersion,jdbcType=VARCHAR},
-      client_version = #{clientVersion,jdbcType=VARCHAR},
-      client_version_name = #{clientVersionName,jdbcType=VARCHAR},
-      client_version_code = #{clientVersionCode,jdbcType=VARCHAR},
+      client_os_firmware = #{clientOsFirmware,jdbcType=VARCHAR},
+      app_version_name = #{appVersionName,jdbcType=VARCHAR},
+      app_version_code = #{appVersionCode,jdbcType=VARCHAR},
       device_uuid = #{deviceUuid,jdbcType=VARCHAR},
       device_model = #{deviceModel,jdbcType=VARCHAR},
       device_brand = #{deviceBrand,jdbcType=VARCHAR},
@@ -228,7 +228,16 @@
       file_path = #{filePath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_client_log
+    where 1=1
+    <if test="_parameter != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="_parameter == null">
+      and id = NULL
+    </if>
+  </delete>
   <select id="listAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

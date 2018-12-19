@@ -10,9 +10,9 @@ public class ApiHeader implements Serializable {
 
     public String clientOS;
     public String clientOSVersion;
-    public String clientVersion;
-    public String clientVersionName;
-    public String clientVersionCode;
+    public String clientOSFirmware;
+    public String appVersionName;
+    public String appVersionCode;
     public String deviceUUID;
     public String deviceModel;
     public String deviceBrand;
@@ -34,9 +34,9 @@ public class ApiHeader implements Serializable {
         apiHeader.deviceBrand = request.getHeader("device_brand");
         apiHeader.deviceModel = request.getHeader("device_model");
         apiHeader.deviceUUID = request.getHeader("device_uuid");
-        apiHeader.clientVersionCode = request.getHeader("client_versioncode");
-        apiHeader.clientVersionName = request.getHeader("client_versionname");
-        apiHeader.clientVersion = request.getHeader("client_version");
+        apiHeader.appVersionName = request.getHeader("app_versioncode");
+        apiHeader.appVersionCode = request.getHeader("app_versionname");
+        apiHeader.clientOSFirmware = request.getHeader("client_os_firmware");
         apiHeader.clientOSVersion = request.getHeader("client_os_version");
         apiHeader.clientOS = request.getHeader("client_os");
         apiHeader.ip = WebUtils.getIpAddress(request);
@@ -53,9 +53,9 @@ public class ApiHeader implements Serializable {
         return "ApiHeader{" +
                 "clientOS='" + clientOS + '\'' +
                 ", clientOSVersion='" + clientOSVersion + '\'' +
-                ", clientVersion='" + clientVersion + '\'' +
-                ", clientVersionName='" + clientVersionName + '\'' +
-                ", clientVersionCode='" + clientVersionCode + '\'' +
+                ", clientOSFirmware='" + clientOSFirmware + '\'' +
+                ", appVersionName='" + appVersionName + '\'' +
+                ", appVersionCode='" + appVersionCode + '\'' +
                 ", deviceUUID='" + deviceUUID + '\'' +
                 ", deviceModel='" + deviceModel + '\'' +
                 ", deviceBrand='" + deviceBrand + '\'' +
@@ -64,6 +64,7 @@ public class ApiHeader implements Serializable {
                 ", userId='" + userId + '\'' +
                 ", timestamp=" + timestamp +
                 ", sign='" + sign + '\'' +
+                ", ip='" + ip + '\'' +
                 '}';
     }
 }

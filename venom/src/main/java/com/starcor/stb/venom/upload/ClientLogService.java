@@ -18,8 +18,4 @@ public class ClientLogService extends BaseService<ClientLog> {
     public List<ClientLog> listAll() {
         return mybatisService.findList(statement("listAll"), null);
     }
-
-    public void insert(){
-         mybatisService.insert(statement("insert"), new ClientLog());
-    }
 }

@@ -11,11 +11,11 @@ public class ClientLog implements Serializable {
 
     private String clientOsVersion;
 
-    private String clientVersion;
+    private String clientOsFirmware;
 
-    private String clientVersionName;
+    private String appVersionName;
 
-    private String clientVersionCode;
+    private String appVersionCode;
 
     private String deviceUuid;
 
@@ -67,28 +67,28 @@ public class ClientLog implements Serializable {
         this.clientOsVersion = clientOsVersion;
     }
 
-    public String getClientVersion() {
-        return clientVersion;
+    public String getClientOsFirmware() {
+        return clientOsFirmware;
     }
 
-    public void setClientVersion(String clientVersion) {
-        this.clientVersion = clientVersion;
+    public void setClientOsFirmware(String clientOsFirmware) {
+        this.clientOsFirmware = clientOsFirmware;
     }
 
-    public String getClientVersionName() {
-        return clientVersionName;
+    public String getAppVersionName() {
+        return appVersionName;
     }
 
-    public void setClientVersionName(String clientVersionName) {
-        this.clientVersionName = clientVersionName;
+    public void setAppVersionName(String appVersionName) {
+        this.appVersionName = appVersionName;
     }
 
-    public String getClientVersionCode() {
-        return clientVersionCode;
+    public String getAppVersionCode() {
+        return appVersionCode;
     }
 
-    public void setClientVersionCode(String clientVersionCode) {
-        this.clientVersionCode = clientVersionCode;
+    public void setAppVersionCode(String appVersionCode) {
+        this.appVersionCode = appVersionCode;
     }
 
     public String getDeviceUuid() {

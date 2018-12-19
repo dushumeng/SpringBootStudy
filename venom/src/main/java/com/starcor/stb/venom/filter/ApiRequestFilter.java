@@ -19,17 +19,17 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
         String servletPath = request.getServletPath();
         if (StringUtils.isNotEmpty(servletPath) && servletPath.startsWith("/api")) {
             ApiHeader apiHeader = ApiHeader.parse(request);
-            if (!apiHeader.isValid()){
-                response.setContentType("application/json");
-                response.getOutputStream().write("{\"code\":-3,\"msg\":\"request is not valid\"}".getBytes());
-                return false;
-            }
-            String midSign = DigestUtils.md5Hex(apiHeader.timestamp + MD5_KEY);
-            if (!StringUtils.equals(midSign, apiHeader.sign)) {
-                response.setContentType("application/json");
-                response.getOutputStream().write("{\"code\":-1}".getBytes());
-                return false;
-            }
+//            if (!apiHeader.isValid()){
+//                response.setContentType("application/json");
+//                response.getOutputStream().write("{\"code\":-3,\"msg\":\"request is not valid\"}".getBytes());
+//                return false;
+//            }
+//            String midSign = DigestUtils.md5Hex(apiHeader.timestamp + MD5_KEY);
+//            if (!StringUtils.equals(midSign, apiHeader.sign)) {
+//                response.setContentType("application/json");
+//                response.getOutputStream().write("{\"code\":-1}".getBytes());
+//                return false;
+//            }
             request.setAttribute("api_header", apiHeader);
         }
         return true;

@@ -18,7 +18,7 @@ public class UploadLogController extends BaseApiController {
     private ClientLogService service;
 
     @RequestMapping(value = "/list")
-    public String list(@ModelAttribute("bean") ClientLog bean, Model model) {
+    public String list(Model model) {
 //        Pager pager = service.findPage(bean);
         List<ClientLog> clientLogs = service.listAll();
         model.addAttribute("list", clientLogs);
@@ -30,5 +30,11 @@ public class UploadLogController extends BaseApiController {
         ClientLog clientLog = service.findById(id);
         model.addAttribute("info", clientLog);
         return "clientlog/show";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String delete(@PathVariable Long id, Model model) {
+        int delete = service.delete(id);
+        return list(model);
     }
 }

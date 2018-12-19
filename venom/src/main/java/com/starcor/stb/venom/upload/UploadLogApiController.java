@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 @RestController
 public class UploadLogApiController extends BaseApiController {
@@ -24,7 +25,7 @@ public class UploadLogApiController extends BaseApiController {
 
     @ResponseBody
     @RequestMapping(value = "/api/upload", method = RequestMethod.POST)
-    public Object upload(HttpServletRequest request, @RequestParam(name = "type") String type, @RequestParam("file") MultipartFile file) {
+    public Object upload(HttpServletRequest request, @RequestParam Map<String, Object> params, @RequestParam("file") MultipartFile file) {
 
         ApiHeader apiHeader = (ApiHeader) request.getAttribute("api_header");
         if (apiHeader == null) {
