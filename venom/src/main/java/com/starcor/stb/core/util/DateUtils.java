@@ -28,6 +28,10 @@ public class DateUtils {
      * 日期格式：yyyy年MM月dd日 HH:mm:ss
      */
     public static final String DATE_FORMAT_5 = "yyyy年MM月dd日 HH:mm:ss";
+    /**
+     * 日期格式：yyyyMMddHHmmsss
+     */
+    public static final String DATE_FORMAT_6 = "yyyyMMddHHmmsss";
 
     private static final Map<String, SimpleDateFormat> dateFormatMap = new HashMap<>();
 

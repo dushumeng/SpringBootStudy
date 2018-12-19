@@ -26,4 +26,27 @@ public class ApiResponse {
         this.code = code;
         this.msg = msg;
     }
+
+    public static ApiResponse createError(CODE code, String msg) {
+        if (code == null) {
+            code = CODE.FAIL;
+        }
+        return new ApiResponse(code.value, msg);
+    }
+
+    public static ApiResponse createError(String msg) {
+        return createError(CODE.FAIL, msg);
+    }
+
+    public static ApiResponse createSuccess(String msg, Object data) {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.code = CODE.SUCCESS.value;
+        apiResponse.msg = msg;
+        apiResponse.data = data;
+        return apiResponse;
+    }
+
+    public static ApiResponse createSuccess(String msg) {
+        return createSuccess(msg, null);
+    }
 }
