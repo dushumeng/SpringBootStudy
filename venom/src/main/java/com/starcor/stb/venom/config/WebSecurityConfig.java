@@ -1,4 +1,4 @@
-package com.starcor.stb.venom.security;
+package com.starcor.stb.venom.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

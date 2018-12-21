@@ -1,15 +1,14 @@
 package com.starcor.stb.venom;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 //新增数据库关联注解
-@SpringBootApplication(scanBasePackages = {"com.starcor.stb"}, exclude = {DataSourceAutoConfiguration.class})
-@MapperScan("com.starcor.stb.venom.mapper")
-@ServletComponentScan
+@SpringBootApplication(scanBasePackages = {"com.starcor.stb"})
+@EnableScheduling
+@EnableTransactionManagement
 public class VenomApplication {
 
     public static void main(String[] args) {

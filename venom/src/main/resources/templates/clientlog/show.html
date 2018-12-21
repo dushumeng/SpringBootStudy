@@ -6,10 +6,10 @@
 </head>
 <body>
 <section layout:fragment="header">
-    <h1>异常分析</h1>
+    <h1>异常信息</h1>
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">异常分析</li>
+        <li><a href="#"><i class="fa fa-folder"></i> 异常概览</a></li>
+        <li class="active">异常信息</li>
     </ol>
 </section>
 <div layout:fragment="content">
@@ -17,67 +17,91 @@
         <div class="box-body no-padding">
             <table class="table">
                 <tr>
-                    <td><b><h4>用户信息</h4></b></td>
+                    <th><b><h4>日志信息</h4></b></th>
                 </tr>
                 <tr>
-                    <td>用户ID</td>
-                    <td th:text="${info.userId}"></td>
-                    <td>用户IP</td>
-                    <td th:text="${info.ip}"></td>
+                    <th style="width:15%">日志类型</th>
+                    <td style="width:85%"><span th:text="${info.type}"></span></td>
                 </tr>
                 <tr>
-                    <td>上报时间</td>
-                    <td th:text="${info.createTimeStr}"></td>
+                    <th style="width:15%">日志文件</th>
+                    <td style="width:85%">
+                        <a th:href="${'/clientlog/download/' + info.filePath}">
+                            <span th:text="${info.filePath}"></span>
+                        </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;解压密码：
+                        <span th:text="${info.psd}"></span>
+                    </td>
+                <tr>
+                <tr>
+                    <th style="width:15%">上报时间</th>
+                    <td style="width:85%"><span th:text="${info.createTimeStr}"></span></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <th></th>
                 </tr>
                 <tr>
-                    <td><b><h4>设备信息</h4></b></td>
+                    <th><b><h4>APP信息</h4></b></th>
                 </tr>
                 <tr>
-                    <td>客户端</td>
-                    <td th:text="${info.clientOs}"></td>
-                    <td>客户端版本</td>
-                    <td th:text="${info.clientOsVersion}"></td>
-                    <td>固件版本</td>
-                    <td th:text="${info.clientOsFirmware}"></td>
+                    <th style="width:15%">APP版本名</th>
+                    <td style="width:85%"><span th:text="${info.appVersionName}"></span></td>
                 </tr>
                 <tr>
-                    <td>APP版本名</td>
-                    <td th:text="${info.appVersionName}"></td>
-                    <td>APP版本号</td>
-                    <td th:text="${info.appVersionCode}"></td>
-                    <td>版本渠道</td>
-                    <td th:text="${info.clientMarket}"></td>
+                    <th style="width:15%">APP版本号</th>
+                    <td style="width:85%"><span th:text="${info.appVersionCode}"></span></td>
+                <tr>
+                <tr>
+                    <th style="width:15%">版本渠道</th>
+                    <td style="width:85%"><span th:text="${info.clientMarket}"></span></td>
+                <tr>
+                <tr>
+                    <th></th>
                 </tr>
                 <tr>
-                    <td>设备ID</td>
-                    <td th:text="${info.deviceUuid}"></td>
-                    <td>设备mac</td>
-                    <td th:text="${info.deviceMac}"></td>
+                    <th><b><h4>用户信息</h4></b></th>
                 </tr>
                 <tr>
-                    <td>品牌</td>
-                    <td th:text="${info.deviceBrand}"></td>
-                    <td>机型</td>
-                    <td th:text="${info.deviceModel}"></td>
+                    <th style="width:15%">用户ID</th>
+                    <td style="width:85%"><span th:text="${info.userId}"></span></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <th style="width:15%">用户IP</th>
+                    <td style="width:85%"><span th:text="${info.ip}"></span></td>
+                <tr>
+                <tr>
+                    <th></th>
                 </tr>
                 <tr>
-                    <td><b><h4>日志信息</h4></b></td>
+                    <th><b><h4>设备信息</h4></b></th>
                 </tr>
                 <tr>
-                    <td>日志类型</td>
-                    <td th:text="${info.type}"></td>
+                    <th style="width:15%">设备ID</th>
+                    <td style="width:85%"><span th:text="${info.deviceUuid}"></span></td>
                 </tr>
                 <tr>
-                    <td>日志文件</td>
-                    <td th:text="${info.filePath}"></td>
-                    <td>解压密码</td>
-                    <td th:text="${info.psd}"></td>
+                    <th style="width:15%">设备mac</th>
+                    <td style="width:85%"><span th:text="${info.deviceMac}"></span></td>
+                </tr>
+                <tr>
+                    <th style="width:15%">客户端</th>
+                    <td style="width:85%"><span th:text="${info.clientOs}"></span></td>
+                </tr>
+                <tr>
+                    <th style="width:15%">客户端版本</th>
+                    <td style="width:85%"><span th:text="${info.clientOsVersion}"></span></td>
+                </tr>
+                <tr>
+                    <th style="width:15%">固件版本</th>
+                    <td style="width:85%"><span th:text="${info.clientOsFirmware}"></span></td>
+                </tr>
+                <tr>
+                    <th style="width:15%">品牌</th>
+                    <td style="width:85%"><span th:text="${info.deviceBrand}"></span></td>
+                </tr>
+                <tr>
+                    <th style="width:15%">机型</th>
+                    <td style="width:85%"><span th:text="${info.deviceModel}"></span></td>
                 </tr>
             </table>
         </div>

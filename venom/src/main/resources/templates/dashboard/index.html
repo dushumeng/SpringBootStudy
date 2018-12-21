@@ -4,8 +4,30 @@
     <title>Dashboard</title>
 </head>
 <body>
+<section layout:fragment="header">
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 概览</a></li>
+        <li class="active">统计</li>
+    </ol>
+</section>
 <div layout:fragment="content">
-    欢迎光临
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3><span th:text="${clientLogSize}"></span><sup style="font-size: 20px">条</sup></h3>
+                        <p>异常信息</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="/clientlog/list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 </body>
 </html>

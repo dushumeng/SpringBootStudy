@@ -238,9 +238,28 @@
       and id = NULL
     </if>
   </delete>
-  <select id="listAll" resultMap="BaseResultMap">
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from t_client_log where 1 > 2 or id in
+    <foreach collection="list" item="item" index="no" open="("
+             separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <select id="listAll" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from t_client_log
+    order by create_time desc
+  </select>
+  <select id="listByTime" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_client_log
+    where 1=1
+    <if test="_parameter != null">
+      <![CDATA[
+      and create_time < #{createTime,jdbcType=INTEGER}
+      ]]>
+    </if>
   </select>
 </mapper>

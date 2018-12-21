@@ -3,17 +3,22 @@ package com.starcor.stb.venom.upload;
 import com.starcor.stb.core.util.EncryptUtils;
 import com.starcor.stb.core.util.FileUtils;
 import com.starcor.stb.venom.api.ApiResponse;
+import com.starcor.stb.venom.config.ConfigEntity;
 import com.starcor.stb.venom.helper.UploadHelper;
 import com.starcor.stb.venom.model.ClientLog;
 import com.starcor.stb.venom.mvc.BaseService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.model.FileHeader;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +26,9 @@ public class ClientLogService extends BaseService<ClientLog> {
 
     @Autowired
     private UploadHelper uploadHelper;
+
+    @Autowired
+    private ConfigEntity configEntity;
 
     @Override
     protected String namespace() {
@@ -75,11 +83,82 @@ public class ClientLogService extends BaseService<ClientLog> {
         if (clientLogList == null || clientLogList.size() == 0) {
             return false;
         }
+        List<Long> idList = new ArrayList<>();
         for (ClientLog clientLog : clientLogList) {
             String file = uploadHelper.getClientLogPath(clientLog.getFilePath());
             FileUtils.delete(file);
-            delete(clientLog.getId());
+            idList.add(clientLog.getId());
         }
+        mybatisService.delete("deleteByIds", idList);
         return true;
+    }
+
+    public void checkClientLogFileSize() {
+        long size = FileUtils.sizeOfDirectory(uploadHelper.getClientLogDir());
+        if (size < configEntity.getUploadPathSize()) {
+            return;
+        }
+        List<ClientLog> list = mybatisService.findList("listAll");
+        List<ClientLog> midList = new ArrayList<>();
+        int fileSize = 0;
+        for (int i = list.size() - 1; i >= 0; i--) {
+            if (fileSize > size / 4) {
+                break;
+            }
+            ClientLog clientLog = list.get(i);
+            String clientLogPath = uploadHelper.getClientLogPath(clientLog.getFilePath());
+            File file = new File(clientLogPath);
+            if (file.exists()) {
+                fileSize += file.length();
+            }
+            midList.add(clientLog);
+        }
+        delete(midList);
+    }
+
+    public void removeOvertimeClientLog() {
+        List<ClientLog> list = mybatisService.findList("listByTime", System.currentTimeMillis());
+        delete(list);
+    }
+
+    public boolean download(String fileName, HttpServletRequest request, HttpServletResponse response) {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try {
+            inputStream = new FileInputStream(new File(uploadHelper.getClientLogPath(fileName)));
+            outputStream = response.getOutputStream();
+            response.setContentType("application/x-download");
+            response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);   // 设置文件名
+            //把输入流copy到输出流
+            IOUtils.copy(inputStream, outputStream);
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            inputStream = null;
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            outputStream = null;
+        }
+
+        return false;
+    }
+
+    public long count(){
+        return mybatisService.count("", null);
     }
 }

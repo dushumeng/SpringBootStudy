@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import com.starcor.stb.core.util.EncryptUtils;
 import com.starcor.stb.venom.api.ApiHeader;
 import com.starcor.stb.venom.api.ApiResponse;
+import com.starcor.stb.venom.config.ConfigEntity;
 import com.starcor.stb.venom.log.Logger;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -25,11 +25,8 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
     @Autowired
     private Gson gson;
 
-    @Value("${com.starcor.stb.md5.key}")
-    private String md5Key;
-
-    @Value("${com.starcor.stb.max-file-size}")
-    private int maxFileSize;
+    @Autowired
+    private ConfigEntity configEntity;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -48,7 +45,7 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
                 response.getOutputStream().write("{\"code\":-3,\"msg\":\"request is not valid\"}".getBytes());
                 return false;
             }
-            String midSign = EncryptUtils.md5(apiHeader.timestamp + md5Key);
+            String midSign = EncryptUtils.md5(apiHeader.timestamp + configEntity.getMd5Key());
             if (!StringUtils.equals(midSign, apiHeader.sign)) {
                 response.setContentType("application/json");
                 response.getOutputStream().write("{\"code\":-1}".getBytes());
@@ -99,7 +96,7 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
                 long size = file.getSize();
                 Logger.i("check file name=", name, ",contentType=", contentType, ";size=", String.valueOf(size));
 
-                if (size > maxFileSize) {
+                if (size > configEntity.getUploadFileSize()) {
                     ApiResponse apiResponse = new ApiResponse(ApiResponse.CODE.FAIL.value, "file size is to big");
                     response.setContentType("application/json");
                     response.getOutputStream().write(gson.toJson(apiResponse).getBytes());
