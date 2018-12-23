@@ -41,6 +41,8 @@ public class ClientLog implements Serializable {
 
     private String filePath;
 
+    private String productId;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -185,5 +187,13 @@ public class ClientLog implements Serializable {
 
     public void setCreateTimeStr(String createTimeStr) {
         this.createTimeStr = createTimeStr;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 }

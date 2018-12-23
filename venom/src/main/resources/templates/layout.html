@@ -2,24 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">SpringBoot AdminLTE2</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Starcor Terminal</title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"/>
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
     <!-- Theme style -->
-    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css"/>
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css"/>
     <!-- iCheck -->
-    <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css" />
+    <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css"/>
     <!-- Morris chart -->
     <link rel="stylesheet" href="/plugins/morris/morris.css"/>
     <!-- jvectormap -->
@@ -41,13 +41,10 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <header class="main-header">
-        <div th:replace="/fragments/header"></div>
-    </header>
+
+    <div th:replace="fragments/header :: fragment_header"></div>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <div th:replace="/fragments/mainsidebar"></div>
-    </aside>
+    <div th:replace="fragments/mainsidebar :: fragment_sidebar"></div>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -88,7 +85,7 @@
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button);
+    $.widget.bridge('uibutton', $.ui.button);
 </script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>

@@ -19,11 +19,12 @@
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="psd" jdbcType="VARCHAR" property="psd" />
     <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, client_os, client_os_version, client_os_firmware, app_version_name, app_version_code,
     device_uuid, device_model, device_brand, client_market, device_mac, user_id, ip, 
-    create_time, type, psd, file_path
+    create_time, type, psd, file_path, product_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -37,13 +38,13 @@
       device_uuid, device_model, device_brand, 
       client_market, device_mac, user_id, 
       ip, create_time, type, 
-      psd, file_path)
+      psd, file_path, product_id)
     values (#{id,jdbcType=INTEGER}, #{clientOs,jdbcType=VARCHAR}, #{clientOsVersion,jdbcType=VARCHAR}, 
       #{clientOsFirmware,jdbcType=VARCHAR}, #{appVersionName,jdbcType=VARCHAR}, #{appVersionCode,jdbcType=VARCHAR},
       #{deviceUuid,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, #{deviceBrand,jdbcType=VARCHAR}, 
       #{clientMarket,jdbcType=VARCHAR}, #{deviceMac,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{ip,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
-      #{psd,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR})
+      #{psd,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.starcor.stb.venom.model.ClientLog">
     insert into t_client_log
@@ -99,6 +100,9 @@
       <if test="filePath != null">
         file_path,
       </if>
+      <if test="productId != null">
+        product_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -151,6 +155,9 @@
       </if>
       <if test="filePath != null">
         #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -205,6 +212,9 @@
       <if test="filePath != null">
         file_path = #{filePath,jdbcType=VARCHAR},
       </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -226,6 +236,7 @@
       type = #{type,jdbcType=VARCHAR},
       psd = #{psd,jdbcType=VARCHAR},
       file_path = #{filePath,jdbcType=VARCHAR}
+      product_id = #{productId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

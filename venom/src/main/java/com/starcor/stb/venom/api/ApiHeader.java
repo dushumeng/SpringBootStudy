@@ -22,24 +22,26 @@ public class ApiHeader implements Serializable {
     public long timestamp;
     public String sign;
     public String ip;
+    public String projectId;
 
     public static ApiHeader parse(HttpServletRequest request) {
 
         ApiHeader apiHeader = new ApiHeader();
-        apiHeader.sign = request.getHeader("sign");
-        apiHeader.timestamp = NumberUtils.parseLong(request.getHeader("timestamp"));
-        apiHeader.deviceMac = request.getHeader("device_mac");
-        apiHeader.userId = request.getHeader("user_id");
-        apiHeader.clientMarket = request.getHeader("client_market");
-        apiHeader.deviceBrand = request.getHeader("device_brand");
-        apiHeader.deviceModel = request.getHeader("device_model");
-        apiHeader.deviceUUID = request.getHeader("device_uuid");
-        apiHeader.appVersionName = request.getHeader("app_versioncode");
-        apiHeader.appVersionCode = request.getHeader("app_versionname");
-        apiHeader.clientOSFirmware = request.getHeader("client_os_firmware");
-        apiHeader.clientOSVersion = request.getHeader("client_os_version");
-        apiHeader.clientOS = request.getHeader("client_os");
+        apiHeader.sign = WebUtils.urlDecoder(request.getHeader("sign"));
+        apiHeader.timestamp = NumberUtils.parseLong(WebUtils.urlDecoder(request.getHeader("timestamp")));
+        apiHeader.deviceMac = WebUtils.urlDecoder(request.getHeader("device_mac"));
+        apiHeader.userId = WebUtils.urlDecoder(request.getHeader("user_id"));
+        apiHeader.clientMarket = WebUtils.urlDecoder(request.getHeader("client_market"));
+        apiHeader.deviceBrand = WebUtils.urlDecoder(request.getHeader("device_brand"));
+        apiHeader.deviceModel = WebUtils.urlDecoder(request.getHeader("device_model"));
+        apiHeader.deviceUUID = WebUtils.urlDecoder(request.getHeader("device_uuid"));
+        apiHeader.appVersionName = WebUtils.urlDecoder(request.getHeader("app_versioncode"));
+        apiHeader.appVersionCode = WebUtils.urlDecoder(request.getHeader("app_versionname"));
+        apiHeader.clientOSFirmware = WebUtils.urlDecoder(request.getHeader("client_os_firmware"));
+        apiHeader.clientOSVersion = WebUtils.urlDecoder(request.getHeader("client_os_version"));
+        apiHeader.clientOS = WebUtils.urlDecoder(request.getHeader("client_os"));
         apiHeader.ip = WebUtils.getIpAddress(request);
+        apiHeader.projectId = WebUtils.urlDecoder(request.getHeader("project_id"));
 
         return apiHeader;
     }
@@ -65,6 +67,7 @@ public class ApiHeader implements Serializable {
                 ", timestamp=" + timestamp +
                 ", sign='" + sign + '\'' +
                 ", ip='" + ip + '\'' +
+                ", projectId='" + projectId + '\'' +
                 '}';
     }
 }

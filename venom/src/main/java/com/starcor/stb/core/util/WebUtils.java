@@ -1,6 +1,7 @@
 package com.starcor.stb.core.util;
 
 import com.starcor.stb.venom.api.ApiHeader;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -11,6 +12,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 
 public class WebUtils {
@@ -127,6 +130,21 @@ public class WebUtils {
             ip = request.getRemoteAddr();
         }
         return ip;
+    }
+
+    public static String urlDecoder(String str) {
+        if (StringUtils.isBlank(str)) {
+            return "";
+        }
+        try {
+            String returnStr = URLDecoder.decode(str, "UTF-8");
+            return returnStr;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 
 }

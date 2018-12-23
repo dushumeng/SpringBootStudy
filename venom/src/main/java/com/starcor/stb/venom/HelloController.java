@@ -12,19 +12,19 @@ public class HelloController {
     @Autowired
     private ClientLogService clientLogService;
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String index(Model model) {
 //        long count = clientLogService.count();
         model.addAttribute("clientLogSize", 999);
         return "dashboard/index";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("login")
     public String login() {
         return "login";
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping("logout")
     public String logout() {
         return "login";
     }

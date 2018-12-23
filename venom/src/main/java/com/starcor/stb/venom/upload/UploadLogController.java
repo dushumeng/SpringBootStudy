@@ -13,27 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/clientlog")
+@RequestMapping("clientlog")
 public class UploadLogController extends BaseApiController {
 
     @Resource
     private ClientLogService service;
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "list")
     public String list(Model model) {
         List<ClientLog> clientLogs = service.listAll();
         model.addAttribute("list", clientLogs);
-        return "/clientlog/list";
+        return "clientlog/list";
     }
 
-    @RequestMapping(value = "/show/{id}")
+    @RequestMapping(value = "show/{id}")
     public String show(@PathVariable Long id, Model model) {
         ClientLog clientLog = service.findById(id);
         model.addAttribute("info", clientLog);
         return "clientlog/show";
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "delete/{id}")
     public String delete(@PathVariable Long id, Model model) {
         ClientLog clientLog = service.findById(id);
         if (clientLog == null) {
@@ -45,7 +45,7 @@ public class UploadLogController extends BaseApiController {
         return "clientlog/list";
     }
 
-    @RequestMapping(value = "/download/{fileName}")
+    @RequestMapping(value = "download/{fileName}")
     public String download(@PathVariable String fileName, Model model, HttpServletRequest request, HttpServletResponse response) {
         boolean download = service.download(fileName, request, response);
         return null;
