@@ -11,13 +11,13 @@ public class ConfigEntity {
     @Value("${com.starcor.stb.upload.path}")
     private String uploadPath;
 
-    @Value("${com.starcor.stb.upload.path.size}")
+    @Value("${com.starcor.stb.upload.clientlog.path.size}")
     private String midUploadPathSize;
 
     @Value("${com.starcor.stb.api.md5.key}")
     private String md5Key;
 
-    @Value("${com.starcor.stb.upload.file.size}")
+    @Value("${com.starcor.stb.upload.clientlog.file.size}")
     private String midUploadFileSize;
 
     private long uploadPathSize = 0;
@@ -32,14 +32,14 @@ public class ConfigEntity {
         return md5Key;
     }
 
-    public long getUploadPathSize() {
+    public long getUploadClientLogPathSize() {
         if (uploadPathSize == 0) {
             uploadPathSize = convertFileSize(midUploadPathSize, 20 * 1024 * 1024);
         }
         return uploadPathSize;
     }
 
-    public long getUploadFileSize() {
+    public long getUploadClientLogFileSize() {
         if (uploadFileSize == 0) {
             uploadFileSize = convertFileSize(midUploadFileSize, 1 * 1024 * 1024);
         }

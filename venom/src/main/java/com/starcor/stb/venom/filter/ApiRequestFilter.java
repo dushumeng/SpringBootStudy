@@ -96,7 +96,7 @@ public class ApiRequestFilter extends HandlerInterceptorAdapter {
                 long size = file.getSize();
                 Logger.i("check file name=", name, ",contentType=", contentType, ";size=", String.valueOf(size));
 
-                if (size > configEntity.getUploadFileSize()) {
+                if (size > configEntity.getUploadClientLogFileSize()) {
                     ApiResponse apiResponse = new ApiResponse(ApiResponse.CODE.FAIL.value, "file size is to big");
                     response.setContentType("application/json");
                     response.getOutputStream().write(gson.toJson(apiResponse).getBytes());

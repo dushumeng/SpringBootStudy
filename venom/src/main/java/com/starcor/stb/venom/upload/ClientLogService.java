@@ -95,7 +95,7 @@ public class ClientLogService extends BaseService<ClientLog> {
 
     public void checkClientLogFileSize() {
         long size = FileUtils.sizeOfDirectory(uploadHelper.getClientLogDir());
-        if (size < configEntity.getUploadPathSize()) {
+        if (size < configEntity.getUploadClientLogPathSize()) {
             return;
         }
         List<ClientLog> list = mybatisService.findList("listAll");
