@@ -5,6 +5,7 @@ import com.starcor.stb.core.util.FileUtils;
 import com.starcor.stb.venom.api.ApiResponse;
 import com.starcor.stb.venom.config.ConfigEntity;
 import com.starcor.stb.venom.helper.UploadHelper;
+import com.starcor.stb.venom.log.Logger;
 import com.starcor.stb.venom.model.ClientLog;
 import com.starcor.stb.venom.mvc.BaseService;
 import net.lingala.zip4j.core.ZipFile;
@@ -95,7 +96,9 @@ public class ClientLogService extends BaseService<ClientLog> {
 
     public void checkClientLogFileSize() {
         long size = FileUtils.sizeOfDirectory(uploadHelper.getClientLogDir());
-        if (size < configEntity.getUploadClientLogPathSize()) {
+        long uploadClientLogPathSize = configEntity.getUploadClientLogPathSize();
+        Logger.i("checkClientLogFileSize--->current:", FileUtils.printSize(size), ",max:" + FileUtils.printSize(uploadClientLogPathSize));
+        if (size < uploadClientLogPathSize) {
             return;
         }
         List<ClientLog> list = mybatisService.findList("listAll");
@@ -118,6 +121,7 @@ public class ClientLogService extends BaseService<ClientLog> {
 
     public void removeOvertimeClientLog() {
         List<ClientLog> list = mybatisService.findList("listByTime", System.currentTimeMillis());
+        Logger.i("removeOvertimeClientLog--->", (list == null || list.size() == 0 ? String.valueOf(0) : String.valueOf(list.size())));
         delete(list);
     }
 
@@ -158,7 +162,7 @@ public class ClientLogService extends BaseService<ClientLog> {
         return false;
     }
 
-    public long count(){
+    public long count() {
         return mybatisService.count("", null);
     }
 }
