@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>异常分析</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>AES加密</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-folder"></i> 工具</a></li>
+        <li class="active">AES加密</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box-body">
+        <form role="form" th:action="@{/tool/encrypt}" th:method="post">
+            <div class="form-group">
+                <label>加密前</label>
+                <input type="text" class="form-control" placeholder="" id="encrypt_before_value"
+                       th:value="${encrypt_before_value}" name="encrypt_before_value">
+            </div>
+            <div class="form-group">
+                <label>加密后</label>
+                <textarea class="form-control" rows="3" placeholder=""
+                          th:text="${encrypt_after_value}" name="encrypt_after_value" disabled></textarea>
+            </div>
+            <span class="input-group-btn">
+                <button type="submit"  name="" id="submit-btn" class="btn">加密</button>
+            </span>
+        </form>
+    </div>
+</div>
+</body>
+</html>

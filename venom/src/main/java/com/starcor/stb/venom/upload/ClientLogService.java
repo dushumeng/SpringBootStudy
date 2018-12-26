@@ -120,7 +120,8 @@ public class ClientLogService extends BaseService<ClientLog> {
     }
 
     public void removeOvertimeClientLog() {
-        List<ClientLog> list = mybatisService.findList("listByTime", System.currentTimeMillis());
+        long checkTime = System.currentTimeMillis() + 3 * 24 * 60 * 60 * 1000;
+        List<ClientLog> list = mybatisService.findList("listByTime", checkTime);
         Logger.i("removeOvertimeClientLog--->", (list == null || list.size() == 0 ? String.valueOf(0) : String.valueOf(list.size())));
         delete(list);
     }
