@@ -22,7 +22,9 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
-        if (httpServletRequest.getServletPath().startsWith("/api/")) {
+        e.printStackTrace();
+        final String servletPath = httpServletRequest.getServletPath();
+        if (servletPath.startsWith("/api/") || servletPath.startsWith("/apiold/")) {
             httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setHeader("Cache-Control", "no-cache, must-revalidate");
@@ -31,10 +33,9 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
                 apiResponse.code = ApiResponse.CODE.SERVER_ERROR.value;
                 apiResponse.msg = "server error";
                 httpServletResponse.getWriter().write(gson.toJson(apiResponse));
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            e.printStackTrace();
             return new ModelAndView();
         }
         return null;

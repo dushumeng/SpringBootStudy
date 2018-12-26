@@ -15,7 +15,7 @@ public class VenomAppConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 可添加多个
-        registry.addInterceptor(apiRequestFilter).addPathPatterns("/api/*");
+        registry.addInterceptor(apiRequestFilter).addPathPatterns("/api/*, /apiold/*");
     }
 
 //    @Bean
